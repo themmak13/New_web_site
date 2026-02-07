@@ -27,7 +27,7 @@ export default function QRScanner({ onScan, onClose }: QRScannerProps) {
           videoRef.current.srcObject = stream;
 
           reader.decodeFromVideoDevice(
-            undefined,
+            null,
             videoRef.current,
             (result, err) => {
               if (result) {
