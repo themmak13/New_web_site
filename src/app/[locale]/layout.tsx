@@ -19,13 +19,19 @@ export const metadata = {
   viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
 };
 
+// 1. Update the Props Type
+type Props = {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>; // Params is now a Promise
+};
+
 export default async function RootLayout({
   children,
-  params: { locale }
-}: {
-  children: React.ReactNode;
-  params: { locale: string };
-}) {
+  params
+}: Props) {
+  // 2. Await the params before using locale
+  const { locale } = await params;
+  
   const messages = await getMessages();
   const dir = locale === 'ar' ? 'rtl' : 'ltr';
 
